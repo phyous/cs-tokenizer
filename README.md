@@ -1,4 +1,4 @@
-# CS Tokenizer
+# cs-tokenizer
 
 A high-performance, thread-safe C# tokenizer library implementing Byte Pair Encoding (BPE) with support for Unicode, special tokens, and streaming operations.
 
