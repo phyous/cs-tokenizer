@@ -57,11 +57,12 @@ namespace CsTokenizer.Implementation
                 {
                     if (_cache.Count >= _maxSize)
                     {
-                        // Evict least frequently used entries
-                        var snapshot = _cache.ToList();
-                        var leastUsed = snapshot
+                        // Create a snapshot of the cache entries
+                        var entries = _cache.ToArray();
+                        var leastUsed = entries
                             .OrderBy(kvp => kvp.Value.HitCount)
-                            .Take(snapshot.Count - _maxSize + 1);
+                            .Take(entries.Length - _maxSize + 1)
+                            .ToArray();
 
                         foreach (var entry in leastUsed)
                         {
@@ -70,7 +71,7 @@ namespace CsTokenizer.Implementation
 
                         _logger.LogInformation(
                             "Cache cleanup: removed {Count} entries",
-                            leastUsed.Count());
+                            leastUsed.Length);
                     }
                 }
             }
